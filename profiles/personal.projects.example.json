@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "defaultProfile": "personal",
+  "profiles": {
+    "personal": {
+      "tracker": {
+        "kind": "local"
+      }
+    },
+    "work": {
+      "tracker": {
+        "kind": "gitlab"
+      }
+    }
+  },
+  "rules": [],
+  "projects": {}
+}

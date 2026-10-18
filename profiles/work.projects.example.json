@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "defaultProfile": "personal",
+  "profiles": {
+    "personal": {
+      "tracker": {
+        "kind": "local"
+      }
+    },
+    "work": {
+      "tracker": {
+        "kind": "gitlab"
+      }
+    }
+  },
+  "rules": [
+    {
+      "profile": "work",
+      "remotePrefix": "gitlab.corporate.example/your-group"
+    },
+    {
+      "profile": "personal",
+      "remotePrefix": "github.com/your-personal-account"
+    }
+  ],
+  "projects": {}
+}

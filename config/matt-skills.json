@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "upstream": "https://github.com/mattpocock/skills.git",
+  "revision": "49dd158d1076134a641b33efb035946536778336",
+  "adaptation": "pi-native-v2",
+  "skills": [
+    "grill-me",
+    "grilling",
+    "grill-with-docs",
+    "wait-what",
+    "writing-for-agents",
+    "ask-matt",
+    "research",
+    "diagnosing-bugs",
+    "implement",
+    "tdd",
+    "code-review",
+    "domain-modeling",
+    "codebase-design",
+    "improve-codebase-architecture",
+    "prototype",
+    "setup-matt-pocock-skills",
+    "to-spec",
+    "to-tickets",
+    "wayfinder",
+    "retro"
+  ]
+}

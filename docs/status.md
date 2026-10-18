@@ -1,0 +1,33 @@
+# Preparation status
+
+Clean configuration source for the existing Pi installation. The user authorized publication of this repository and the prepared fork updates after the implementation/review stage. New upstream PRs are explicitly deferred; none are part of this publication.
+
+## Applied on home
+
+- Shared twenty Matt skills generated from official `49dd158d1076134a641b33efb035946536778336`, adaptation `pi-native-v2`, under `~/.agents/skills/matt-pocock`. Native Pi discovery verified twenty, no duplicate names. Old Pi-only copy and receipts remain in private state outside discovery.
+- Small home-specific global AGENTS navigation plus shared policy; private project resolver defaults need no per-repository setup. This does not make the work AGENTS identical.
+- Literal Skill-tool invocations in generated selected Markdown replaced with native file loading. Build fails on unrecognized residual invocations; provenance identifies changes.
+- pi-pwsh fast-forwarded cleanly to upstream `c2e8b70a33153d01565d0dbcdd9fb1d121c930bd` (0.11.1), including the accepted contention fix merged upstream. PR #20 is merged upstream; the personal fork master was fast-forwarded to the same commit. Production-only dependencies installed without duplicate host peers; no automatic unrelated dependency fixes.
+
+## Existing accepted source, additional candidates pending
+
+- Subagents installed and published fork main are `fcf7aff77ba808ae66a2f23278dfbdbb3caa0773` (0.2.8), fast-forwarded from `9f50d582d6e269f7636127fa4936fa4a04832cb6` without rewriting history. This includes earlier accepted combined viewer/routing/aliases/performance work; isolated upstream topic preparation must not replace it.
+- Compact transcript installed and published fork main are `7e3378c04e8024ed09650629357e648cd02bf4ef`, fast-forwarded from `f2c72aca8ccbcb68bd3b58e8fc37351bc3733eda`; includes local failed-tool disclosure work. No partial PR branch substituted.
+- Smart-fetch local source is `868ed0d15d2fa58bc64204de4e30f72b514b4818`, branch `sit/pr-30`, package 0.3.17. Its local source/build update is separate from Pi managed npm updates; no automatic checkout change is implied.
+- Telegram public source/tag v0.8.3 is `d639c9b3ddb28303cae75e9afb2104540d3ab29d`; home reader starts at 0.8.1. Staging code is not switching the live authenticated reader. Private permissions/profile/auth must remain unchanged.
+- Standalone saved-session continuation and dependent model-alias candidates were prepared against upstream `a720295a0d1bec9440962b2856373cda4c2a27d2`. Focused public/native/recursive fixture tests and strict typechecks pass. Their full legacy Windows regression harness still has inherited stdin/cleanup failures. The stdout caveat was reproduced identically on clean upstream and both candidates in nine controlled public-seam runs, with six relevant control-flow blocks byte-equivalent after normalization; it is a baseline pre-close snapshot race, not a candidate-only regression. No transport fix was folded into the feature patches. These candidates are not installed and no full-green legacy-harness claim is made.
+- Exact Telegram 0.8.3 candidate source passed 213 tests, with 3 skips and no failures (216 total). These are isolated fixtures, not an authenticated live Telegram acceptance test. All 3,761 installed reader files stayed byte-identical; its running readers were not stopped.
+- Billion-context 0.1.201 and copied baseline 0.1.199 both passed the real Pi 1.3.0 native offline import/factory/registration smoke: identical 12 event kinds, 16 handlers and three ACP commands. No session/provider hook or ACP action ran. This does not establish full compression/provider compatibility; live 0.1.199 remains unchanged.
+- The other three configured managed npm packages were already at the checked current versions. See `config/components.json`; do not confuse downloaded/tested candidates with installed updates.
+
+## Evidence and limits
+
+Installer/project-context/public-source tests currently pass 62, with one Windows symlink-permission skip (63 total), using real temporary filesystem/Git/CLI seams. Review-found source-authentication, ignored-file inclusion, foreign-provenance, durable-backup, tracker-schema and concurrent-write defects have regression coverage. Follow-up regressions cover separate Git metadata with linked worktrees, nested/alternate skill-discovery backup roots, and the active Pi agent-directory default. Independent Standards and Spec rereviews completed for the previous installer freeze. A subsequent home/work-boundary audit found an overly broad work-profile example and an unjustified fixed-email restriction in the preparation report. The work example now selects corporate context positively instead of applying it to every repository on the machine; five resolver scenarios verify unclassified/personal, corporate, unrelated-namespace and lookalike-host boundaries. A focused independent audit also clarified that archived work settings are historical design input and preservation is not endorsement; the related documentation was corrected. The previous installer freeze does not certify later policy edits or the actual work PC.
+
+Private settings, MCP configuration and model-alias configuration remain unchanged from the preparation snapshot. The public source was checked against private MCP values without copying or printing those values. No work computer or physical GUI/provider fleet was exercised. This is not an all-settings equality, six-live-provider performance or complete candidate-runtime compatibility claim.
+
+Bili/Telegram activation requires a safe restart/reconnection boundary. Preparing candidates did not authorize stopping unrelated live sessions, copying browser authentication to another computer, or publishing anything. Work installation remains separately unverified.
+
+## Publication gate
+
+This repository contains only the clean source and synthetic examples, never the old lab history, work archive, corporate skills, auth, private MCP values, Telegram permissions, browser state or conversations. Required source commits/remote refs and the config repository must be explicitly authorized and published before another PC can fetch currently local-only pins. The earlier claim that the unpublished home subagents commit needed a fixed noreply identity was incorrect. Its existing personal identity is not a publication blocker; no author/committer rewrite was performed or is required. The combined source pins above are now available from the personal forks; isolated runtime candidates remain unactivated and upstream topic PRs remain deferred. Work installation remains a separate actual-machine verification.
