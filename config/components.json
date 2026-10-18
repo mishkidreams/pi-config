@@ -51,7 +51,7 @@
       "upstream": "https://github.com/mishkidreams/telegram-browser-mcp.git",
       "tag": "v0.8.3",
       "sourceCommit": "d639c9b3ddb28303cae75e9afb2104540d3ab29d",
-      "installedVersion": "0.8.1",
+      "installedVersion": "0.8.3",
       "sourceVersion": "0.8.3",
       "management": "private-application"
     }
@@ -71,8 +71,7 @@
     },
     {
       "source": "npm:billion-context",
-      "installedVersion": "0.1.199",
-      "candidateVersion": "0.1.201"
+      "installedVersion": "0.1.201"
     }
   ],
   "pullRequests": [

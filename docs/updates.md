@@ -33,4 +33,10 @@ An unpinned npm billion-context package is therefore covered; an existing local 
 
 The common mechanics, user policy, project-storage mapping and private machine layer have different owners. Update the shared source once; regenerate home/work from the same revision while retaining their distinct global/private policy. Do not install a Skill-tool addon to compensate for stale literal tool calls.
 
-See [rollback](rollback.md) for rejected candidates and [status](status.md) for this preparation's actual outcomes.
+## Published configuration versus an installed machine
+
+After an agreed update, reconcile `config/components.json` and [status](status.md) with the verified installation, and publish those changes when authorized. Updating files on one PC does not update this Git repository or another PC. Conversely, pulling this repository does not install npm packages or replace the Telegram application.
+
+The current recorded home versions are Telegram **0.8.3** and billion-context **0.1.201**. On another PC, inspect its actual configuration first, then install the selected npm version through Pi's managed-package mechanism and deploy Telegram from the pinned standalone source. Keep that PC's settings, permissions and authenticated browser profile; do not copy the home application-data directory. Restart/reconnect Pi after updating and verify the new server/package identity. Home verification is not work-PC acceptance.
+
+See [rollback](rollback.md) for rejected candidates and [status](status.md) for actual published and installed outcomes.
