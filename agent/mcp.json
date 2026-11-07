@@ -7,7 +7,7 @@
         "@browsermcp/mcp@latest"
       ],
       "timeout": 600,
-      "exposure": "deferred",
+      "exposure": "direct",
       "description": "User's already-open Chrome: authenticated pages, tabs, navigation, clicks, typing, keyboard input, DOM snapshots, screenshots, console, network requests, and page scripts."
     },
     "context7": {

@@ -1,6 +1,6 @@
 # macOS / Apple Silicon — первоначальная настройка
 
-Нужны Node.js с npm/npx и Git в PATH. Для Pi через npm требуется Node >=22.19.0:
+Нужны Node.js с npm/npx и Git в PATH. Если сеть требует HTTP-прокси, сначала настрой переменные из [раздела ниже](#только-если-нужен-http-прокси); поле `proxy` в Bili добавляется после копирования его конфига. Для Pi через npm требуется Node >=22.19.0:
 
 ```sh
 npm install -g --ignore-scripts @earendil-works/pi-coding-agent
@@ -12,9 +12,8 @@ npm install -g --ignore-scripts @earendil-works/pi-coding-agent
 
 ```sh
 config_root="${XDG_CONFIG_HOME:-$HOME/.config}"
-mkdir -p "$HOME/.pi/agent" "$HOME/.agents/skills" "$config_root/billion-context"
+mkdir -p "$HOME/.pi/agent" "$config_root/billion-context"
 cp -R ./agent/. "$HOME/.pi/agent/"
-cp -R ./skills/skill-creator "$HOME/.agents/skills/"
 cp ./billion-context/billion-context.json "$config_root/billion-context/billion-context.json"
 
 # Однократно добавить постоянный лимит для новых терминалов Zsh
@@ -37,6 +36,6 @@ export HTTPS_PROXY='http://HOST:PORT'
 export NO_PROXY='localhost,127.0.0.1,::1'
 ```
 
-Сохрани нужные своей сети дополнительные исключения NO_PROXY. Затем открой новое окно терминала. Прокси-приложение, если оно нужно, устанавливается отдельно; конфиг Billion Context остаётся в режиме `auto`, без домашнего адреса или пустого `proxy`.
+Сохрани нужные своей сети дополнительные исключения NO_PROXY. Затем открой новое окно терминала. Прокси-приложение, если оно нужно, устанавливается отдельно. Для Billion Context дополнительно укажи тот же действительный URL в поле `proxy` его локального JSON по [общей инструкции](../README.md#прокси-и-vpn); одного `auto` не считаем достаточным. Если провайдеры уже доступны без HTTP-прокси, в том числе через настроенный VPN, этот раздел пропускается.
 
-Эти инструкции и общие файлы подготовлены для macOS/ARM64, но настоящий запуск на MacBook пока не выполнен.
+Скрипты проверены статически; настоящий macOS/ARM64 runtime-тест не выполнен.
