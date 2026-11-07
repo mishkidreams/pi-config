@@ -6,7 +6,7 @@
         "-y",
         "@browsermcp/mcp@latest"
       ],
-      "timeout": 600,
+      "timeout": 60,
       "exposure": "direct",
       "description": "User's already-open Chrome: authenticated pages, tabs, navigation, clicks, typing, keyboard input, DOM snapshots, screenshots, console, network requests, and page scripts."
     },
