@@ -1,33 +1,45 @@
-# Pi configuration: personal and work
+# pi-config
 
-A clean configuration source for an existing Pi installation on two Windows computers. This is not a replacement harness and does not publish the old experimentation repository.
+Личный набор для настройки пустого Pi: домашний Windows, рабочий Windows и будущий macOS / Apple Silicon. После копирования файлов checkout не нужен работающему Pi.
 
-See [status](docs/status.md) for actual published, installed and candidate versions. Publication of this source does not mean the work computer was accessed or changed.
+## Состав
 
-## What is shared
+| Источник | Куда устанавливается |
+| --- | --- |
+| `agent/*` | `~/.pi/agent/` |
+| `skills/skill-creator/` | `~/.agents/skills/skill-creator/` |
+| `billion-context/billion-context.json` | `~/.config/billion-context/billion-context.json` |
+| `windows/README.md`, `macos/README.md` | Инструкции первоначальной настройки, не файлы runtime |
 
-- The chosen twenty Matt Pocock skills, with an explicit upstream pin and reproducible Pi adaptation.
-- Common user rules, including independent review and separately authorized publication.
-- External project context and personal artifact paths, inherited profiles and project exceptions.
-- [Component sources/pins](config/components.json), installation/update validation and rollback instructions.
+Конфиги общие. Отличие инструментов: Windows добавляет `-bash,+powershell`; macOS использует штатный Bash. Интерактивный Zsh на Mac менять не нужно. Внешний конфиг Billion Context учитывает `XDG_CONFIG_HOME`, если он задан.
 
-## What stays private
+Семь расширений перечислены только в `agent/settings.json`: поиск, собственный compact-transcript, goal, loop, smart-fetch, Billion Context и subagent. Источники без фиксации версий. У goal отключены поставляемые prompts, у loop — skills. Собственный compact не спрашивает о настройках и не требует `compact-transcript.json`.
 
-Private machine-specific AGENTS.md additions, corporate skills/instructions, auth, MCP secret values, Telegram permissions and authenticated browser profiles, conversations and local artifacts.
+Сохранены личные предпочтения интерфейса, основная модель Sol, `xhigh` и четыре override контекста 272000. Три универсальных агента `light/standart/strong` используют Luna/Terra/Sol и наследуют инструменты; модели указаны в их файлах. `enabledModels` ограничивает переключение основной модели, не выбор модели агента.
 
-## Start with a plan
+## Первоначальная установка
 
-Requires Windows PowerShell 7, Git, Node 24 and the existing Pi 1.3.0 setup. Linux/macOS are not validated here.
+1. Нужны Pi, Node.js с `npm/npx` и Git; для Windows также PowerShell 7. Node для npm-версии Pi — не ниже 22.19.0. Редактор `code --wait` нужен только для вызова внешнего редактора: установи команду VS Code в PATH либо измени `externalEditor`.
+2. Клонируй `https://github.com/mishkidreams/pi-config.git` (или распакуй скачанный архив) и перейди в корень checkout. Выполни короткую инструкцию для [Windows](windows/README.md) или [macOS](macos/README.md). Она копирует общие файлы и **однократно сохраняет** ограничение вложенности.
+3. Запусти `pi`. Недостающие пакеты из settings устанавливаются штатно; первый запуск требует сети. Ошибку установки не игнорируй: повторить установку/обновление расширений можно через `pi update --extensions`.
+4. Через `/login` авторизуй `openai-codex`. Нужен аккаунт с доступом к указанным моделям. Авторизация создаётся на этой машине, в репозитории её нет.
+5. Для Browser MCP установи [расширение Chrome](https://browsermcp.io/install) в обычный рабочий профиль. При первом обращении выполни сопряжение и разреши доступ; следующие подключения используют сохранённую локальную идентичность. Не добавляй вторую копию MCP в настройки.
+6. Context7 использует публичный HTTPS endpoint. Если сервис запросит авторизацию или ограничит доступ, это отдельное условие сервиса; репозиторий не предоставляет учётные данные.
 
-```powershell
-npm test
-node scripts/machine-profile.mjs --profile home
-node scripts/matt-skills.mjs --source "$HOME/source/repos/matt-pocock-skills" --destination "$HOME/.agents/skills/matt-pocock"
-node scripts/project-context.mjs --cwd "$HOME/source/repos/example"
-```
+Инструкции рассчитаны на пустой профиль, не на перезапись уже настроенного Pi. Старую конфигурацию сначала сохрани отдельно. Корпоративные MCP и инструкции нового работодателя — отдельный рабочий слой, в этом домашнем наборе их нет.
 
-Use `--apply` only after checking the plan and keeping the reported backup. Home and work use the same common user-policy base with justified environment-specific additions. On the work machine choose `--profile work`; back up and review its current private instructions instead of copying the home file or restoring old archive policy unchanged.
+## Проверка после установки
 
-Copy the appropriate profiles/*.projects.example.json to private ~/.pi/agent/projects.json only when that file does not already exist; edit private rules there. Resolver defaults already provide personal/local tracking without creating anything.
+- `pi mcp list --json`: только `browsermcp` (deferred) и `context7` (direct), без ошибок подключения.
+- В Pi доступен `/skill:skill-creator`; каталог субагентов содержит `light`, `standart`, `strong`.
+- Спроси агента о доступных инструментах: Windows — `powershell` без `bash`, macOS — `bash` без принудительного PowerShell.
+- В новом терминале проверь сохранённое `PI_SUBAGENT_MAX_DEPTH=1` по инструкции своей ОС. Основной агент может делегировать, дочерние не получают инструмент `subagent`. Это не ограничение количества параллельных детей и не OS sandbox.
+- После авторизации можно выполнить короткий запрос к модели; для реальной проверки браузера нужен открытый Chrome и завершённое сопряжение.
 
-See [architecture](docs/architecture.md), [rollback](docs/rollback.md), [installation](docs/install.md), [updates](docs/updates.md), and [status](docs/status.md). The scripts do not authorize commits, remote repository creation or publication.
+Billion Context получает прокси в режиме `auto`; конкретного домашнего адреса в конфиге нет. Если сеть требует HTTP-прокси, сохрани свои переменные по инструкции ОС. `proxy: ""` означает явный прямой маршрут, а не пустой шаблон.
+
+## Что не переносится
+
+Auth, MCP-токены, сессии, cookies, browser profiles, device ID и отметки просмотренных changelog создаются локально. Здесь нет глобального AGENTS, старых корпоративных skills, Telegram MCP, генераторов или ссылок на лабораторный репозиторий. LICENSE рядом со skill — уведомление о лицензии, не инструкция агенту.
+
+Настоящий macOS/ARM64 запуск до получения MacBook не проверен. У Browser MCP ранее наблюдались отдельные 5-секундные таймауты screenshot; успешное подключение не означает, что эта особенность исправлена.

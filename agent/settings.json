@@ -1,0 +1,41 @@
+{
+  "defaultTools": [
+    "+grep",
+    "+find",
+    "+ls",
+    "+codemode"
+  ],
+  "packages": [
+    "npm:pi-web-search",
+    "git:github.com/mishkidreams/pi-compact-transcript",
+    {
+      "source": "npm:pi-codex-goal",
+      "prompts": []
+    },
+    {
+      "source": "npm:@maheidem/pi-loop",
+      "skills": []
+    },
+    "npm:pi-smart-fetch",
+    "npm:billion-context",
+    "npm:@mjakl/pi-subagent"
+  ],
+  "defaultProvider": "openai-codex",
+  "defaultModel": "gpt-6.1-sol",
+  "defaultThinkingLevel": "xhigh",
+  "enabledModels": [
+    "openai-codex/gpt-6-astra",
+    "openai-codex/gpt-6.1-sol",
+    "openai-codex/gpt-6.1-terra"
+  ],
+  "defaultProjectTrust": "always",
+  "externalEditor": "code --wait",
+  "hideThinkingBlock": true,
+  "extensions": [
+    "-builtin:llama.cpp"
+  ],
+  "fullscreenWheelScrollLines": 5,
+  "fullscreenScrollbar": "always",
+  "fullscreenExitOutput": "transcript",
+  "steeringMode": "all"
+}
