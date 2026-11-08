@@ -68,7 +68,9 @@ Keep essential guidance in `SKILL.md`. Add resources only for a concrete benefit
 
 Link resources relative to the skill directory and say when they are needed. Keep information in one place; do not load every reference by default. A short self-contained skill needs no router, generated placeholders, README, changelog, UI metadata, or helper scripts.
 
-Preserve automatic discovery by default. Use Pi's `disable-model-invocation: true` only when the user requests explicit-only use; do not confuse discoverability with authorization for sensitive actions. Preserve an existing invocation policy on a focused edit.
+Choose invocation policy by purpose and scope: normally keep narrow knowledge aids and task helpers automatically discoverable; make separately opted-in workflows explicit-only with Pi's `disable-model-invocation: true` unless agreed otherwise. Judge whether a skill helps the requested task or redirects it into its own process, not merely whether it contains instructions or steps. Discuss mixed or unclear cases; split knowledge from an opt-in workflow only when useful. Preserve an existing invocation policy on a focused edit.
+
+This flag hides the name, description, and path from Pi's automatic model catalog, not filesystem access; `/skill:name` still works and already-read instructions can remain in context. Discoverability does not authorize writes, commits, or publication.
 
 ## Check the change proportionately
 
