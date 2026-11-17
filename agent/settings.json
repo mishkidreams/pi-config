@@ -20,13 +20,12 @@
     "npm:billion-context",
     "npm:@mjakl/pi-subagent"
   ],
-  "defaultProvider": "openai-codex",
-  "defaultModel": "gpt-6.1-sol",
-  "defaultThinkingLevel": "xhigh",
+  "defaultProvider": "openai",
+  "defaultModel": "gpt-6.2-astra",
+  "defaultThinkingLevel": "max",
   "enabledModels": [
-    "openai-codex/gpt-6-astra",
-    "openai-codex/gpt-6.1-sol",
-    "openai-codex/gpt-6.1-terra"
+    "openai/gpt-6.2-astra",
+    "openai/gpt-6.2-sol"
   ],
   "defaultProjectTrust": "always",
   "externalEditor": "code --wait",
