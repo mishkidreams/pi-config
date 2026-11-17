@@ -17,6 +17,7 @@
 | `agent/*` | `~/.pi/agent/` |
 | `agent/skills/skill-creator/` (входит в `agent/*`) | `~/.pi/agent/skills/skill-creator/` |
 | `agent/skills/collaborative-dev/` (входит в `agent/*`) | `~/.pi/agent/skills/collaborative-dev/` |
+| `agent/skills/retro/` (входит в `agent/*`) | `~/.pi/agent/skills/retro/` |
 | `billion-context/billion-context.json` | `~/.config/billion-context/billion-context.json` |
 | `work/agent/AGENTS.md` (только отдельным рабочим шагом) | `~/.pi/agent/AGENTS.md` |
 | `windows/README.md`, `macos/README.md`, `work/README.md` | Инструкции первоначальной настройки, не файлы runtime |
@@ -52,10 +53,16 @@
 
 Вызов: `/skill:collaborative-dev`. В навыке сохранено `disable-model-invocation: true`: он не попадает в автоматический каталог модели, но доступен по явной команде. Для субагентов отдельно оговорено выполнение поручения родителя, без ожидания пользовательского ревью.
 
+## Ретроспектива
+
+`/skill:retro` разбирает текущую сессию, а по запросу — другую сессию или отдельную итерацию. Его можно вызвать и по ходу работы: `/skill:retro почему пришлось дважды переделывать проверку?` Навык предлагает в чате, что сохранить, упростить или исправить в окружении Pi. Он не ведёт отдельный журнал; ты выбираешь, что применить.
+
+Это самостоятельная адаптация [retro Мэтта Покока](https://github.com/mattpocock/skills/blob/5863806dd4e15c63174bee4e7515a4256792ecfa/skills/engineering/retro/SKILL.md) для Pi ([MIT](agent/skills/retro/LICENSE)).
+
 ## Проверка после установки
 
 - `pi mcp list --json`: в базовом наборе `browsermcp` и `context7`, оба `direct`, без ошибок подключения. Локально добавленные корпоративные сервисы могут расширять этот список.
-- В Pi доступны `/skill:skill-creator` и явный `/skill:collaborative-dev`; каталог субагентов содержит `light`, `standart`, `strong`.
+- В Pi доступны `/skill:skill-creator` и две команды для явного вызова: `/skill:collaborative-dev` и `/skill:retro`; каталог субагентов содержит `light`, `standart`, `strong`.
 - После рабочего шага проверь локальный `~/.pi/agent/AGENTS.md`: оба раздела сохранены, `<WORK_REPOS>` заменён реальным путём. Базовая домашняя установка этот файл не создаёт; ранее существующий файл она также не удаляет.
 - Спроси агента о доступных инструментах: Windows — `powershell` без `bash`, macOS — `bash` без принудительного PowerShell.
 - В новом терминале проверь сохранённое `PI_SUBAGENT_MAX_DEPTH=1` по инструкции своей ОС. Основной агент может делегировать, дочерние не получают инструмент `subagent`. Это не ограничение количества параллельных детей и не OS sandbox.
