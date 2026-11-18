@@ -51,7 +51,7 @@
 
 ## Общий системный профиль
 
-[`pi-prompt-profiles`](https://pi.dev/packages/pi-prompt-profiles) ставит перед штатным промптом Pi один [адаптированный текст Codex](agent/system-prompts/profiles/codex.md) для основного агента и субагентов. Pi сохраняет свою роль, инструменты, `AGENTS.md` и каталог навыков. На чистой машине файл и выбор профиля приезжают с `agent/*`, расширение — из `agent/settings.json`; ничего отдельно из Codex скачивать не нужно. [Источник, отличия и порядок ручного обновления](agent/system-prompts/README.md).
+[`pi-prompt-profiles`](https://pi.dev/packages/pi-prompt-profiles) ставит перед штатным промптом Pi один [адаптированный текст Codex](agent/system-prompts/profiles/codex.md) для основного агента и субагентов. Pi сохраняет свою роль, инструменты, `AGENTS.md` и каталог навыков. На чистой машине файл и выбор профиля приезжают с `agent/*`, расширение — из `agent/settings.json`; ничего отдельно из Codex скачивать не нужно. [Как отключить и вернуть профиль](agent/system-prompts/README.md#как-отключить-и-вернуть-профиль) · [Источник и порядок обновления](agent/system-prompts/README.md).
 
 ## Работа над правилами
 
