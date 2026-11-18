@@ -15,7 +15,9 @@
 | Источник | Куда устанавливается |
 | --- | --- |
 | `agent/*` | `~/.pi/agent/` |
+| `agent/system-prompts/` (входит в `agent/*`) | `~/.pi/agent/system-prompts/` |
 | `agent/skills/skill-creator/` (входит в `agent/*`) | `~/.pi/agent/skills/skill-creator/` |
+| `agent/skills/rules-creator/` (входит в `agent/*`) | `~/.pi/agent/skills/rules-creator/` |
 | `agent/skills/collaborative-dev/` (входит в `agent/*`) | `~/.pi/agent/skills/collaborative-dev/` |
 | `agent/skills/retro/` (входит в `agent/*`) | `~/.pi/agent/skills/retro/` |
 | `billion-context/billion-context.json` | `~/.config/billion-context/billion-context.json` |
@@ -26,7 +28,7 @@
 
 Конфиги общие. Отличие инструментов: Windows добавляет `-bash,+powershell`; macOS использует штатный Bash. Интерактивный Zsh на Mac менять не нужно. Внешний конфиг Billion Context учитывает `XDG_CONFIG_HOME`, если он задан.
 
-Семь расширений перечислены только в `agent/settings.json`: поиск, собственный compact-transcript, goal, loop, smart-fetch, Billion Context и subagent. Источники без фиксации версий. У goal отключены поставляемые prompts, у loop — skills. Собственный compact не спрашивает о настройках и не требует `compact-transcript.json`.
+Восемь расширений перечислены в `agent/settings.json`: поиск, собственный compact-transcript, goal, loop, smart-fetch, Billion Context, subagent и pi-prompt-profiles. Источники без фиксации версий. У goal отключены поставляемые prompts, у loop — skills. Собственный compact не спрашивает о настройках и не требует `compact-transcript.json`.
 
 Основная модель — `openai/gpt-6.2-astra`; в переключателе также доступна `openai/gpt-6.2-sol`. Уровень рассуждений по умолчанию — `max` для основной модели и всех трёх субагентов. Размеры контекстных окон берутся из каталога Pi без локальных переопределений.
 
@@ -47,6 +49,14 @@
 
 В [work/README.md](work/README.md) описаны установка рабочего `AGENTS.md`, локальная подстановка корня репозиториев и подключение материалов нового работодателя. Рабочий файл сохраняет оба раздела — полномочия и навигацию — без названий компаний и пользовательских путей. Закрытые материалы и учётные данные в этот репозиторий не копируются.
 
+## Общий системный профиль
+
+[`pi-prompt-profiles`](https://pi.dev/packages/pi-prompt-profiles) ставит перед штатным промптом Pi один [адаптированный текст Codex](agent/system-prompts/profiles/codex.md) для основного агента и субагентов. Pi сохраняет свою роль, инструменты, `AGENTS.md` и каталог навыков. На чистой машине файл и выбор профиля приезжают с `agent/*`, расширение — из `agent/settings.json`; ничего отдельно из Codex скачивать не нужно. [Источник, отличия и порядок ручного обновления](agent/system-prompts/README.md).
+
+## Работа над правилами
+
+[`rules-creator`](agent/skills/rules-creator/SKILL.md) доступен модели при создании, адаптации и аудите инструкций. Например: `/skill:rules-creator проверь, совместим ли предлагаемый промпт с рабочим AGENTS.md и навыком публикации`. Он разбирает, какие правила встретятся в одной задаче, предупреждает о конкретных противоречиях и предлагает, где их исправить. Это не фоновая проверка каждой сессии. Для авторства самого `SKILL.md` остаётся `skill-creator`.
+
 ## Совместная разработка
 
 `collaborative-dev` — общий для дома и работы навык осмысленных итераций с промежуточным ревью, учётом будущих зависимостей и самостоятельностью в согласованных границах. Он сохраняет личный режим взаимодействия, а не вводит обязательный процесс для всех задач.
@@ -62,7 +72,8 @@
 ## Проверка после установки
 
 - `pi mcp list --json`: в базовом наборе `browsermcp` и `context7`, оба `direct`, без ошибок подключения. Локально добавленные корпоративные сервисы могут расширять этот список.
-- В Pi доступны `/skill:skill-creator` и две команды для явного вызова: `/skill:collaborative-dev` и `/skill:retro`; каталог субагентов содержит `light`, `standart`, `strong`.
+- После установки `skill-creator` и `rules-creator` видны модели и доступны как `/skill:skill-creator` и `/skill:rules-creator`. Ещё два навыка вызываются только явно: `/skill:collaborative-dev` и `/skill:retro`. Каталог субагентов содержит `light`, `standart`, `strong`.
+- `/sp status` в новой сессии показывает глобальный профиль `codex`. После установки пакета в уже открытом Pi выполни `/reload`; после изменения только файлов профиля достаточно `/sp reload`.
 - После рабочего шага проверь локальный `~/.pi/agent/AGENTS.md`: оба раздела сохранены, `<WORK_REPOS>` заменён реальным путём. Базовая домашняя установка этот файл не создаёт; ранее существующий файл она также не удаляет.
 - Спроси агента о доступных инструментах: Windows — `powershell` без `bash`, macOS — `bash` без принудительного PowerShell.
 - В новом терминале проверь сохранённое `PI_SUBAGENT_MAX_DEPTH=1` по инструкции своей ОС. Основной агент может делегировать, дочерние не получают инструмент `subagent`. Это не ограничение количества параллельных детей и не OS sandbox.

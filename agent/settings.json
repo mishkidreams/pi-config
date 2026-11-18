@@ -18,7 +18,8 @@
     },
     "npm:pi-smart-fetch",
     "npm:billion-context",
-    "npm:@mjakl/pi-subagent"
+    "npm:@mjakl/pi-subagent",
+    "npm:pi-prompt-profiles"
   ],
   "defaultProvider": "openai",
   "defaultModel": "gpt-6.2-astra",
