@@ -1,5 +1,8 @@
 {
   "version": 1,
-  "defaultProfile": "global:codex",
-  "subagents": "inherit"
+  "defaultProfile": "global:personal",
+  "subagents": "inherit",
+  "profiles": {
+    "personal": { "extends": "global:codex" }
+  }
 }
