@@ -34,6 +34,25 @@
 
 При входе в `openai` через подписку ChatGPT команда `/fast on` включает Fast для Astra и Sol без изменения уровня рассуждений. `/fast off` выключает режим, `/fast status` показывает его состояние. Изначально Fast выключен. Выбор запоминается для новых сессий. В режиме Fast обе модели GPT-6.2 расходуют вдвое больше включённой квоты. [Описание расширения](https://github.com/nijaru/pi-fast-mode) · [Коэффициенты расхода квоты OpenAI](https://learn.chatgpt.com/docs/pricing#speed-multipliers).
 
+<details>
+<summary>Настройка Astra и Sol, если npm-реестр установил версию 0.0.9</summary>
+
+В `0.0.9` есть команда `/fast`, но GPT-6.2 ещё нет во встроенном списке. Добавь обе модели и их коэффициенты в локальный `~/.pi/agent/extensions/pi-fast-mode.json`, сохранив существующие настройки, затем вызови `/reload`.
+
+```json
+{
+  "allowlist": ["openai/gpt-6.2-astra", "openai/gpt-6.2-sol"],
+  "multipliers": {
+    "openai/gpt-6.2-astra": 2,
+    "openai/gpt-6.2-sol": 2
+  }
+}
+```
+
+В `0.0.11` обе модели уже есть. После обновления удали их из локальных `allowlist` и `multipliers`, чтобы расширение брало коэффициенты из встроенной таблицы.
+
+</details>
+
 Субагенты используют того же провайдера: `light` — `gpt-6-luna`, `standart` — `gpt-6.1-terra`, `strong` — `gpt-6.2-sol`. Их модели заданы в `agent/agents/` независимо от `enabledModels`; инструменты они наследуют.
 
 ## Первоначальная установка
