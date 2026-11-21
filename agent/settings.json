@@ -20,7 +20,7 @@
     "npm:billion-context",
     "npm:@mjakl/pi-subagent",
     "npm:pi-prompt-profiles",
-    "npm:@nijaru/pi-fast-mode"
+    "npm:@gowthamgts/pi-codex-fast-mode"
   ],
   "defaultProvider": "openai",
   "defaultModel": "gpt-6.2-astra",

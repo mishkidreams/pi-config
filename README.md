@@ -28,39 +28,22 @@
 
 Конфиги общие. Отличие инструментов: Windows добавляет `-bash,+powershell`; macOS использует штатный Bash. Интерактивный Zsh на Mac менять не нужно. Внешний конфиг Billion Context учитывает `XDG_CONFIG_HOME`, если он задан.
 
-Общие расширения в `agent/settings.json` — поиск, собственный compact-transcript, goal, loop, smart-fetch, Billion Context, subagent, pi-prompt-profiles и `@nijaru/pi-fast-mode`. Источники без фиксации версий. У goal отключены поставляемые prompts, у loop — skills. Собственный compact не спрашивает о настройках и не требует `compact-transcript.json`.
+Общие расширения в `agent/settings.json` — поиск, собственный compact-transcript, goal, loop, smart-fetch, Billion Context, subagent, pi-prompt-profiles и `@gowthamgts/pi-codex-fast-mode`. Источники без фиксации версий. У goal отключены поставляемые prompts, у loop — skills. Собственный compact не спрашивает о настройках и не требует `compact-transcript.json`.
 
 Основная модель — `openai/gpt-6.2-astra`; в переключателе также доступна `openai/gpt-6.2-sol`. Уровень рассуждений по умолчанию — `max` для основной модели и всех трёх субагентов. Размеры контекстных окон берутся из каталога Pi без локальных переопределений.
 
-При входе в `openai` через подписку ChatGPT команда `/fast on` включает Fast для Astra и Sol без изменения уровня рассуждений. `/fast off` выключает режим, `/fast status` показывает его состояние. Изначально Fast выключен. Выбор запоминается для новых сессий. В режиме Fast обе модели GPT-6.2 расходуют вдвое больше включённой квоты. [Описание расширения](https://github.com/nijaru/pi-fast-mode) · [Коэффициенты расхода квоты OpenAI](https://learn.chatgpt.com/docs/pricing#speed-multipliers).
-
-<details>
-<summary>Настройка Astra и Sol, если npm-реестр установил версию 0.0.9</summary>
-
-В `0.0.9` есть команда `/fast`, но GPT-6.2 ещё нет во встроенном списке. Добавь обе модели и их коэффициенты в локальный `~/.pi/agent/extensions/pi-fast-mode.json`, сохранив существующие настройки, затем вызови `/reload`.
-
-```json
-{
-  "allowlist": ["openai/gpt-6.2-astra", "openai/gpt-6.2-sol"],
-  "multipliers": {
-    "openai/gpt-6.2-astra": 2,
-    "openai/gpt-6.2-sol": 2
-  }
-}
-```
-
-В `0.0.11` обе модели уже есть. После обновления удали их из локальных `allowlist` и `multipliers`, чтобы расширение брало коэффициенты из встроенной таблицы.
-
-</details>
-
 Субагенты используют того же провайдера: `light` — `gpt-6-luna`, `standart` — `gpt-6.1-terra`, `strong` — `gpt-6.2-sol`. Их модели заданы в `agent/agents/` независимо от `enabledModels`; инструменты они наследуют.
+
+Fast включён по умолчанию. Расширение запрашивает `service_tier: "priority"` для любой модели через Responses API провайдеров `openai` и `openai-codex`, не меняя уровень рассуждений. Отдельный список моделей не нужен. Ultrafast расширение не запрашивает. `/fast off` и `/fast on` сохраняют выбор для новых сессий, в том числе субагентов. `/fast status` показывает текущую настройку. [Описание расширения](https://github.com/gowthamgts/pi-stuff/tree/main/extensions/codex-fast-mode).
+
+При входе через ChatGPT расход включённой квоты в режиме Fast относительно Standard составляет 2× для GPT-6.2 Astra и Sol и 2,5× для GPT-6.1 Terra и GPT-6 Luna. Для новых моделей доступность и коэффициенты определяет OpenAI. [Тарифы Fast](https://learn.chatgpt.com/docs/pricing#speed-multipliers).
 
 ## Первоначальная установка
 
 1. Нужны Pi, Node.js с `npm/npx` и Git; для Windows также PowerShell 7. Node для npm-версии Pi — не ниже 22.19.0. Редактор `code --wait` нужен только для вызова внешнего редактора: установи команду VS Code в PATH либо измени `externalEditor`.
 2. Клонируй `https://github.com/mishkidreams/pi-config.git` (или распакуй скачанный архив) и перейди в корень checkout. Выполни короткую инструкцию для [Windows](windows/README.md) или [macOS](macos/README.md). Она копирует общие файлы и **однократно сохраняет** ограничение вложенности. На рабочем ноутбуке затем отдельно установи [рабочее дополнение](work/README.md); дома этот шаг пропускается.
 3. Если HTTP-прокси нужен для доступа или ты хочешь использовать его по своему выбору, сначала выполни раздел прокси своей ОС и [настрой Bili](#прокси-и-vpn). Затем запусти `pi`. Недостающие пакеты из settings устанавливаются штатно; первый запуск требует сети. Ошибку установки не игнорируй: повторить установку/обновление расширений можно через `pi update --extensions`.
-4. Настрой доступ к провайдеру `openai` через `/login openai` или переменную `OPENAI_API_KEY`. Учётные данные должны давать доступ к указанным моделям; они остаются на машине и не входят в репозиторий.
+4. Для работы по подписке ChatGPT войди через `/login openai`. Если вместо входа через ChatGPT использовать `OPENAI_API_KEY`, запросы оплачиваются по тарифам API. Учётные данные остаются на машине и не входят в репозиторий.
 5. Для Browser MCP установи [расширение из Chrome Web Store](https://chromewebstore.google.com/detail/browser-mcp-let-ai-use-yo/bjfgambnhccakkhmkepdoekmckoijdlc) в обычный рабочий профиль. При первом обращении выполни сопряжение и разреши доступ; следующие подключения используют сохранённую локальную идентичность. Не добавляй вторую копию MCP в настройки.
 6. Context7 использует публичный HTTPS endpoint. Если сервис запросит авторизацию или ограничит доступ, это отдельное условие сервиса; репозиторий не предоставляет учётные данные.
 
