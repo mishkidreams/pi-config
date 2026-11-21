@@ -28,9 +28,11 @@
 
 Конфиги общие. Отличие инструментов: Windows добавляет `-bash,+powershell`; macOS использует штатный Bash. Интерактивный Zsh на Mac менять не нужно. Внешний конфиг Billion Context учитывает `XDG_CONFIG_HOME`, если он задан.
 
-Восемь расширений перечислены в `agent/settings.json`: поиск, собственный compact-transcript, goal, loop, smart-fetch, Billion Context, subagent и pi-prompt-profiles. Источники без фиксации версий. У goal отключены поставляемые prompts, у loop — skills. Собственный compact не спрашивает о настройках и не требует `compact-transcript.json`.
+Общие расширения в `agent/settings.json` — поиск, собственный compact-transcript, goal, loop, smart-fetch, Billion Context, subagent, pi-prompt-profiles и `@nijaru/pi-fast-mode`. Источники без фиксации версий. У goal отключены поставляемые prompts, у loop — skills. Собственный compact не спрашивает о настройках и не требует `compact-transcript.json`.
 
 Основная модель — `openai/gpt-6.2-astra`; в переключателе также доступна `openai/gpt-6.2-sol`. Уровень рассуждений по умолчанию — `max` для основной модели и всех трёх субагентов. Размеры контекстных окон берутся из каталога Pi без локальных переопределений.
+
+При входе в `openai` через подписку ChatGPT команда `/fast on` включает Fast для Astra и Sol без изменения уровня рассуждений. `/fast off` выключает режим, `/fast status` показывает его состояние. Изначально Fast выключен. Выбор запоминается для новых сессий. В режиме Fast обе модели GPT-6.2 расходуют вдвое больше включённой квоты. [Описание расширения](https://github.com/nijaru/pi-fast-mode) · [Коэффициенты расхода квоты OpenAI](https://learn.chatgpt.com/docs/pricing#speed-multipliers).
 
 Субагенты используют того же провайдера: `light` — `gpt-6-luna`, `standart` — `gpt-6.1-terra`, `strong` — `gpt-6.2-sol`. Их модели заданы в `agent/agents/` независимо от `enabledModels`; инструменты они наследуют.
 
