@@ -28,7 +28,9 @@
 
 Конфиги общие. Отличие инструментов: Windows добавляет `-bash,+powershell`; macOS использует штатный Bash. Интерактивный Zsh на Mac менять не нужно. Внешний конфиг Billion Context учитывает `XDG_CONFIG_HOME`, если он задан.
 
-Общие расширения в `agent/settings.json` — поиск, собственный compact-transcript, goal, loop, smart-fetch, Billion Context, subagent, pi-prompt-profiles и `@gowthamgts/pi-codex-fast-mode`. Источники без фиксации версий. У goal отключены поставляемые prompts, у loop — skills. Собственный compact не спрашивает о настройках и не требует `compact-transcript.json`.
+Общие расширения в `agent/settings.json` — поиск, собственный compact-transcript, goal, loop, smart-fetch, Billion Context, subagent, pi-prompt-profiles, `@gowthamgts/pi-codex-fast-mode` и `pi-think-twice`. Источники без фиксации версий. У goal отключены поставляемые prompts, у loop — skills. Собственный compact не спрашивает о настройках и не требует `compact-transcript.json`.
+
+При наборе обычного промпта `Enter` запускает трёхсекундный отсчёт до отправки. Если продолжить печатать или нажать `Esc`, отправка отменится, а текст останется в редакторе. Чтобы отправить раньше, нажми `Enter` ещё раз не менее чем через секунду после первого нажатия. [pi-think-twice на npm](https://www.npmjs.com/package/pi-think-twice).
 
 Основная модель — `openai/gpt-6.2-astra`; в переключателе также доступна `openai/gpt-6.2-sol`. Уровень рассуждений по умолчанию — `max` для основной модели и всех трёх субагентов. Размеры контекстных окон берутся из каталога Pi без локальных переопределений.
 
