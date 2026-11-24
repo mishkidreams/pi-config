@@ -28,7 +28,7 @@
 
 Конфиги общие. Отличие инструментов: Windows добавляет `-bash,+powershell`; macOS использует штатный Bash. Интерактивный Zsh на Mac менять не нужно. Внешний конфиг Billion Context учитывает `XDG_CONFIG_HOME`, если он задан.
 
-Общие расширения в `agent/settings.json` — поиск, собственный compact-transcript, goal, loop, smart-fetch, Billion Context, subagent, pi-prompt-profiles, `@gowthamgts/pi-codex-fast-mode`, `pi-think-twice` и `@yukikisaku/pi-retain-cache`. Версии npm-пакетов не закреплены. У goal отключены поставляемые prompts, у loop — skills. Собственный compact не спрашивает о настройках и не требует `compact-transcript.json`.
+Общие расширения в `agent/settings.json` — поиск, собственный compact-transcript, goal, loop, smart-fetch, Billion Context, subagent, pi-prompt-profiles, `@gowthamgts/pi-codex-fast-mode` и `pi-think-twice`. Версии npm-пакетов не закреплены. У goal отключены поставляемые prompts, у loop — skills. Собственный compact не спрашивает о настройках и не требует `compact-transcript.json`.
 
 При наборе обычного промпта `Enter` запускает трёхсекундный отсчёт до отправки. Если продолжить печатать или нажать `Esc`, отправка отменится, а текст останется в редакторе. Чтобы отправить раньше, нажми `Enter` ещё раз не менее чем через секунду после первого нажатия. [pi-think-twice на npm](https://www.npmjs.com/package/pi-think-twice).
 
@@ -54,9 +54,9 @@ Fast включён по умолчанию. Расширение запраши
 
 ### Прогрев кэша GPT во время простоя
 
-Пока Pi открыт в терминале и компьютер не спит, `@yukikisaku/pi-retain-cache` отправляет в ту же сессию короткие скрытые запросы, чтобы при возвращении к работе модель могла повторно использовать кэш промпта. Для GPT по умолчанию запросы идут раз в 25 минут и прекращаются через 2 часа после последнего обычного ответа. Они расходуют квоту подписки ChatGPT и не гарантируют попадания в кэш.
+В общем профиле оставили обычное кэширование OpenAI без `@yukikisaku/pi-retain-cache`. Расширение версии 0.1.2 добавляло в диалог скрытую инструкцию, и модель комментировала её даже в ответ на обычный вопрос. В длинной сессии с Billion Context при сжатии инструкции потерялся точный текст ожидаемого ответа. На следующий фоновый запрос модель попыталась вызвать `search_context` и вывела в чат `OK`.
 
-В меню `/retain-cache` можно изменить интервал (`gpt interval`), предел простоя (`Retain prompt cache for`) и уведомления о промахах кэша. Стрелки ↑/↓ выбирают строку, ←/→ меняют значение. В новый профиль расширение устанавливается с общей конфигурацией. В существующий его можно добавить отдельно командой `pi install npm:@yukikisaku/pi-retain-cache`, затем выполнить `/reload` в открытом Pi. [pi-retain-cache на GitHub](https://github.com/yukikisaku/pi-retain-cache).
+Если расширение осталось в ранее установленном профиле, удали его командой `pi remove npm:@yukikisaku/pi-retain-cache`. В уже открытом Pi выполни `/reload`.
 
 ## Первоначальная установка
 
