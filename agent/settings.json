@@ -21,7 +21,8 @@
     "npm:@mjakl/pi-subagent",
     "npm:pi-prompt-profiles",
     "npm:@gowthamgts/pi-codex-fast-mode",
-    "npm:pi-think-twice"
+    "npm:pi-think-twice",
+    "npm:@yukikisaku/pi-retain-cache"
   ],
   "defaultProvider": "openai",
   "defaultModel": "gpt-6.2-astra",
