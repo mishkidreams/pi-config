@@ -6,7 +6,7 @@
     "+codemode"
   ],
   "packages": [
-    "npm:pi-web-search",
+    "git:github.com/mishkidreams/pi-web-search@fix/restrict-openai-search-tools",
     "git:github.com/mishkidreams/pi-compact-transcript",
     {
       "source": "npm:pi-codex-goal",
